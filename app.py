@@ -1,3 +1,4 @@
+
 import streamlit as st
 import numpy as np
 import tensorflow as tf
@@ -31,7 +32,7 @@ st.title("🧠 Artificial Neural Network Prediction System")
 st.markdown(
     """
     This application uses an **Artificial Neural Network (ANN)**
-    to make predictions based on five input features.
+    to make predictions based on four input features.
     """
 )
 
@@ -49,7 +50,7 @@ st.sidebar.info(
 
     **Framework:** TensorFlow / Keras
 
-    **Input Features:** 5
+    **Input Features:** 4
 
     **Hidden Layers:** 2
 
@@ -76,7 +77,7 @@ st.subheader("🏗️ Model Architecture")
 col1, col2, col3 = st.columns(3)
 
 with col1:
-    st.metric("Input Features", "5")
+    st.metric("Input Features", "4")
 
 with col2:
     st.metric("Hidden Layers", "2")
@@ -86,7 +87,7 @@ with col3:
 
 st.code(
     """
-Input Layer
+Input Layer (4 Features)
      ↓
 Dense Layer (16 neurons, ReLU)
      ↓
@@ -118,19 +119,14 @@ with col1:
         value=0.0
     )
 
+with col2:
     feature3 = st.number_input(
         "Feature 3",
         value=0.0
     )
 
-with col2:
     feature4 = st.number_input(
         "Feature 4",
-        value=0.0
-    )
-
-    feature5 = st.number_input(
-        "Feature 5",
         value=0.0
     )
 
@@ -142,15 +138,18 @@ st.divider()
 
 if st.button("🔮 Make Prediction", use_container_width=True):
 
-    input_data = np.array([
+    # Exactly 4 input features
+    input_data = np.array(
         [
-            feature1,
-            feature2,
-            feature3,
-            feature4,
-            feature5
-        ]
-    ], dtype=np.float32)
+            [
+                feature1,
+                feature2,
+                feature3,
+                feature4
+            ]
+        ],
+        dtype=np.float32
+    )
 
     # Model prediction
     prediction = model.predict(
